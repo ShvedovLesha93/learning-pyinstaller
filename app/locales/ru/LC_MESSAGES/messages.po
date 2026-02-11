@@ -1,0 +1,26 @@
+# Language =ru translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-11 11:40+0300\n"
+"PO-Revision-Date: 2026-02-11 11:53+0300\n"
+"Last-Translator: <EMAIL@ADDRESS>\n"
+"Language-Team: Language =ru\n"
+"Language: =ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: main.py:39
+msgid "Change language"
+msgstr "Изменить язык"
+
+#: main.py:56
+#, python-brace-format
+msgid "Language changed to: {lang}"
+msgstr "Язык изменен на: {lang}"

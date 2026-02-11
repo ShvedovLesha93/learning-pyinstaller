@@ -1,4 +1,5 @@
 import sys
+
 from PySide6.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -9,10 +10,25 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtCore import QTimer, Qt
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+
+from app.translator import language_manager, _
+
 
 class MainWindow(QMainWindow):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
+
+        self.lang_manager = language_manager
+        self._languages = ["ru", "en"]
+        self._current_lang = "en"
+        self.lang_manager.set_language(self._current_lang)
+        self._setup_ui()
+        self.retranslate()
+
+    def _setup_ui(self) -> None:
         self.setWindowTitle("Click Me Demo")
         self.setGeometry(100, 100, 300, 150)
 
@@ -22,7 +38,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(central_widget)
 
         # Button
-        self.button = QPushButton("Click Me")
+        self.button = QPushButton()
         self.button.clicked.connect(self.on_button_click)
         layout.addWidget(self.button)
 
@@ -36,16 +52,35 @@ class MainWindow(QMainWindow):
         self.timer.timeout.connect(self.clear_label)
         self.timer.setSingleShot(True)  # Fire only once
 
-    def on_button_click(self):
-        self.label.setText("clicked")
+    def on_button_click(self) -> None:
+        self.change_lang()
+        self.retranslate()
         self.timer.start(3000)  # 3000 milliseconds = 3 seconds
 
-    def clear_label(self):
+    def change_lang(self) -> None:
+        if self._current_lang == "en":
+            self._current_lang = "ru"
+            self.lang_manager.set_language("ru")
+        else:
+            self._current_lang = "en"
+            self.lang_manager.set_language("en")
+
+    def clear_label(self) -> None:
         self.label.setText("")
 
+    def retranslate(self) -> None:
+        self.label.setText(
+            _("Language changed to: {lang}").format(lang=self._current_lang)
+        )
+        self.button.setText(_("Change language"))
 
-if __name__ == "__main__":
+
+def main() -> None:
     app = QApplication(sys.argv)
     window = MainWindow()
     window.show()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()
