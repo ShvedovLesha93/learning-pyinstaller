@@ -5,9 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[
-        ('app/locales', 'app/locales'),
-    ],
+    datas=[],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -29,6 +27,7 @@ exe = EXE(
     strip=False,
     upx=True,
     console=True,
+    contents_directory='runtime',
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,

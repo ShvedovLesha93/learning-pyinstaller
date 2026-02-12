@@ -17,9 +17,7 @@ class LanguageManager(QObject):
 
         # Detect if running from PyInstaller bundle
         if getattr(sys, "frozen", False):
-            # Running in PyInstaller bundle
-            bundle_dir = Path(sys._MEIPASS)  # type: ignore
-            self.locales_dir = bundle_dir / "app" / "locales"
+            self.locales_dir = Path("locales")
         else:
             # Running in normal Python environment
             self.locales_dir = Path("app/locales")
