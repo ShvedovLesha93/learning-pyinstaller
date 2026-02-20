@@ -1,4 +1,4 @@
-# Learning PyInstaller
+# Python Desktop Distribution
 
 A sample `PySide6` application demonstrating how to build cross-platform desktop applications with internationalization (i18n) support using a lightweight `uv`-based bootstrap launcher.
 
@@ -25,7 +25,7 @@ Instead of bundling all libraries into a large exe, `PyInstaller` only packages 
 
 ```bash
 # Clone the repository
-git clone https://github.com/ShvedovLesha93/learning-pyinstaller.git
+git clone https://github.com/ShvedovLesha93/python-desktop-distribution.git
 cd learning-pyinstaller
 
 # Install dependencies
@@ -36,7 +36,7 @@ uv sync
 
 ```bash
 # Clone the repository
-git clone https://github.com/ShvedovLesha93/learning-pyinstaller.git
+git clone https://github.com/ShvedovLesha93/python-desktop-distribution.git
 cd learning-pyinstaller
 
 # Create virtual environment

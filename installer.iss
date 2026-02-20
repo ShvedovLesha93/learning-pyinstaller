@@ -1,7 +1,7 @@
 #define MyAppName "My Program"
 #define MyAppVersion "1.5"
 #define MyAppPublisher "My Company, Inc."
-#define MyAppURL "https://github.com/ShvedovLesha93/learning-pyinstaller"
+#define MyAppURL "https://github.com/ShvedovLesha93/python-desktop-distribution"
 #define MyAppExeName "MyApp.exe"
 
 [Setup]
