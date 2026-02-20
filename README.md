@@ -1,14 +1,18 @@
 # Learning PyInstaller
 
-A sample `PySide6` application demonstrating how to build cross-platform desktop applications with internationalization (i18n) support using `PyInstaller`.
+A sample `PySide6` application demonstrating how to build cross-platform desktop applications with internationalization (i18n) support using a lightweight `uv`-based bootstrap launcher.
+
+## How it works
+
+Instead of bundling all libraries into a large exe, `PyInstaller` only packages a small launcher. On first run, the launcher uses `uv` to download and install all dependencies into a local `.venv` next to the executable. Subsequent launches skip this step entirely. The final installer is built with [Inno Setup](https://jrsoftware.org/isinfo.php).
 
 ## Features
 
 - ✨ Simple `PySide6` GUI with language switching
 - 🌍 Internationalization support using `gettext`
-- 📦 `PyInstaller` configuration for production builds
 - 🔄 Runtime language switching between English and Russian
-- 🚀 Properly configured for bundled executables
+- 📦 Lightweight launcher — only a small exe is shipped, dependencies are fetched on first run
+- 🚀 Fully isolated environment — `uv` manages its own Python, no system Python required
 
 ## Requirements
 
@@ -55,18 +59,30 @@ python main.py
 
 ## Building
 
+### 1. Build the launcher and assemble dist
 ```bash
-uv run py build.py
+uv run python build.py
 ```
 
-The executable will be created in `dist/main/`.
+The `dist/` folder will be assembled with:
+- `MyApp.exe` — the launcher (built by PyInstaller, no dependencies bundled)
+- App source files, `pyproject.toml`, and `uv.lock`
+
+### 2. Build the installer
+
+Open `installer.iss` in [Inno Setup](https://jrsoftware.org/isinfo.php) and click Build, or run from the command line:
+```bash
+iscc installer.iss
+```
+
+The final `mysetup.exe` installer will be placed in `release/`.
 
 ## Resources
 
-- [PyInstaller Documentation](https://pyinstaller.org/)
+- [uv Documentation](https://docs.astral.sh/uv/)
 - [PySide6 Documentation](https://doc.qt.io/qtforpython/)
 - [GNU gettext Manual](https://www.gnu.org/software/gettext/manual/)
-- [UV Package Manager](https://github.com/astral-sh/uv)
+- [PyInstaller Documentation](https://pyinstaller.org/)
 
 ## License
 

@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pyside6>=6.10.2",
+    "rich>=14.3.3",
 ]
 
 [dependency-groups]

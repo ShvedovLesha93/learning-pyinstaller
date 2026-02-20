@@ -1,45 +1,25 @@
-# -*- mode: python ; coding: utf-8 -*-
+from PyInstaller.utils.hooks import collect_all
 
+rich_datas, rich_binaries, rich_hiddenimports = collect_all("rich")
 
 a = Analysis(
-    ['main.py'],
+    ["launcher.py"],
     pathex=[],
-    binaries=[],
-    datas=[],
-    hiddenimports=[],
+    binaries=rich_binaries,
+    datas=rich_datas,
+    hiddenimports=rich_hiddenimports,
     hookspath=[],
-    hooksconfig={},
     runtime_hooks=[],
     excludes=[],
-    noarchive=False,
-    optimize=0,
 )
 pyz = PYZ(a.pure)
-
 exe = EXE(
     pyz,
     a.scripts,
-    [],
-    exclude_binaries=True,
-    name='main',
-    debug=False,
-    bootloader_ignore_signals=False,
-    strip=False,
-    upx=True,
-    console=True,
-    contents_directory='runtime',
-    disable_windowed_traceback=False,
-    argv_emulation=False,
-    target_arch=None,
-    codesign_identity=None,
-    entitlements_file=None,
-)
-coll = COLLECT(
-    exe,
     a.binaries,
     a.datas,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    name='main',
+    name="MyApp",
+    debug=False,
+    console=True,   # set False once you add a splash screen
+    onefile=True,
 )

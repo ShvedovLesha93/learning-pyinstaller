@@ -2,10 +2,8 @@ import shutil
 from pathlib import Path
 import subprocess
 
-# import app.locales as locales
-
-LOCALES_PATH = Path("app")
-DIST_LOCALES_PATH = Path("dist/main")
+APP_PATH = Path("app")
+DIST_PATH = Path("dist")
 
 
 def run_pyinstaller() -> tuple[bool, str | None]:
@@ -18,8 +16,15 @@ def run_pyinstaller() -> tuple[bool, str | None]:
         return (False, str(e))
 
 
-def copy_locales() -> None:
-    shutil.copytree(LOCALES_PATH / "locales", DIST_LOCALES_PATH / "locales")
+def collect_files() -> None:
+    shutil.copytree(
+        APP_PATH,
+        DIST_PATH / "app",
+        ignore=shutil.ignore_patterns("__pycache__", "*.po", "*.pot", "*.pyc"),
+    )
+
+    for file in ["main.py", "uv.lock", "pyproject.toml"]:
+        shutil.copy(file, DIST_PATH / file)
 
 
 def clean():
@@ -41,8 +46,8 @@ def main() -> None:
     result, err = run_pyinstaller()
     if result:
         print("✓ PyInstaller build complete\n")
-        copy_locales()
-        print("✓ Locales copied\n")
+        collect_files()
+        print("✓ Necessary files copied\n")
     else:
         print(f"✗ Build failed: {err}")
 
